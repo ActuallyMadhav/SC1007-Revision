@@ -7,7 +7,7 @@ class LinkedList:
     def __init__(self):
         self.size = 0
         self.head = None
-    
+
     def findNode(self, index):
         if self.head is None:
             raise ValueError("List is empty")
@@ -75,30 +75,38 @@ class LinkedList:
         self.head = None
         self.size = 0
 
-def moveEvenItemsToBack(ll):
-    # TODO : Enter code here
+def moveMaxToFront(ll):
+    #TODO : Enter code here
+    if ll.size < 2:
+        return 
+    
+    cur = ll.head
+    maxNode = ll.head
+    preMax = None
+    
+    
 
 if __name__ == "__main__":
     ll = LinkedList()
 
     while True:
         print("1: Insert an integer to the linked list:")
-        print("2: Move all even integers to the back of the linked list:")
+        print("2: Move the largest stored value to the front of the list:")
         print("0: Quit:")
 
         choice = int(input("Please input your choice (1/2/0): "))
 
         if choice == 1:
             value = int(input("Input an integer that you want to add to the linked list: "))
-            ll.insertNode(value, ll.size)
+            ll.insertNode(value, ll.size)  
             print("The resulting linked list is:")
-            ll.printList()
+            ll.printList()  
         elif choice == 2:
-            moveEvenItemsToBack(ll)
-            print("The resulting linked list after moving even integers to the back is:")
-            ll.printList()
+            moveMaxToFront(ll)
+            print("The resulting linked list after moving the largest stored value to the front of the list is:")
+            ll.printList()  
         elif choice == 0:
-            ll.removeAllItems()
+            ll.removeAllItems()  
             break
         else:
-            print("Choice unknown;")
+            print("Choice unknown.")
