@@ -77,14 +77,46 @@ class LinkedList:
 
 def moveMaxToFront(ll):
     #TODO : Enter code here
+    # if ll.size < 2:
+    #     return 
+    
+    # cur = ll.head
+    # maxNode = ll.head
+    # preMax = None
+    
+    # while cur.next:
+    #     if cur.next.item > maxNode.item:
+    #         preMax = cur
+    #         maxNode = cur.next
+    #     cur = cur.next
+    
+    # if preMax is None:
+    #     return 0
+    
+    # preMax.next = maxNode.next
+    # maxNode.next = ll.head
+    # ll.head = maxNode
+
+    # return 0
     if ll.size < 2:
-        return 
+        return
     
     cur = ll.head
     maxNode = ll.head
-    preMax = None
+    index = 0
+    maxIndex = 0
+
+    for _ in range(ll.size):
+        if cur.item > maxNode.item:
+            maxNode = cur
+            maxIndex = index
+        
+        cur = cur.next
+        index += 1
     
-    
+    ll.removeNode(maxIndex)
+    ll.insertNode(maxNode.item, 0)
+        
 
 if __name__ == "__main__":
     ll = LinkedList()
