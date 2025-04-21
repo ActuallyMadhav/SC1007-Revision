@@ -15,11 +15,41 @@ def hash_func(key):
 
 
 def hash_insert(key, hash_table):
-    # Write your insertion logic here
-
+#write your codes here
+    h = hash_func(key)
+    if hash_table[h].indicator == EMPTY:
+        hash_table[h].key = key
+        hash_table[h].indicator = USED
+        hash_table[h].next = -1
+        return h
+    current = h
+    if hash_table[h].key == key:
+        return -1
+    while hash_table[current].next != -1:
+        current = hash_table[current].next
+        if hash_table[current].key == key:
+            return -1
+    for i in range(1, TABLESIZE):
+        index = (h + i) % TABLESIZE
+        if hash_table[index].indicator == EMPTY:
+            hash_table[index].key = key
+            hash_table[index].indicator = USED
+            hash_table[index].next = -1
+            hash_table[current].next = index
+            return index
+    return TABLESIZE 
 
 def hash_find(key, hash_table):
-    # Write your search logic here
+    h = hash_func(key)
+    if hash_table[h].indicator == USED:
+        if hash_table[h].key == key:
+            return h
+        current = hash_table[h].next
+        while current != -1:
+            if hash_table[current].key == key:
+                return current
+            current = hash_table[current].next
+    return -1
 
 
 def print_menu():

@@ -17,12 +17,47 @@ def hash2(key):
 
 
 def hash_insert(key, hash_table):
-    # Write your code here
-
+#write your codes here
+    candidate = -1    
+    comparisons = 0   
+    for i in range(TABLESIZE):
+        index = (hash1(key) + i * hash2(key)) % TABLESIZE
+        slot = hash_table[index]
+        if slot.indicator == USED:
+            comparisons += 1
+            if slot.key == key:
+                return -1
+        elif slot.indicator == DELETED:
+            if candidate == -1:
+                candidate = index
+        elif slot.indicator == EMPTY:
+            if candidate != -1:
+                hash_table[candidate].key = key
+                hash_table[candidate].indicator = USED
+            else:
+                slot.key = key
+                slot.indicator = USED
+            return comparisons
+    if candidate != -1:
+        hash_table[candidate].key = key
+        hash_table[candidate].indicator = USED
+        return comparisons
+    return comparisons
 
 
 def hash_delete(key, hash_table):
-    # Write your code here
+    comparisons = 0
+    for i in range(TABLESIZE):
+        index = (hash1(key) + i * hash2(key)) % TABLESIZE
+        slot = hash_table[index]
+        if slot.indicator == USED:
+            comparisons += 1
+            if slot.key == key:
+                slot.indicator = DELETED
+                return comparisons
+        elif slot.indicator == EMPTY:
+            return -1
+    return -1
 
 
 def print_menu():
